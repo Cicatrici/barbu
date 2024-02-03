@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Smooth Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #f2f2f2, #333);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s infinite; /* Adjust the duration as needed */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, rgb(255, 0, 0), rgb(0, 255, 0), rgb(0, 0, 0));
+            background-size: 600% 100%;
+            color: transparent;
+            -webkit-background-clip: text;
+            text-shadow: 0 0 10px white; /* White outline */
+            animation: gradientTextAnimation 5s infinite; /* Adjust the duration as needed */
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes gradientTextAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Trail Effect Styles */
+        .cursor-trail {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ffcc00; /* Trail color */
+            border-radius: 50%;
+            pointer-events: none;
+            transform-origin: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        a.button-link {
+            position: relative;
+            text-decoration: none;
+        }
+
+        button {
+            font-size: 2em;
+            padding: 15px 30px;
+            background-color: #002147; /* Dark blue color */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #001529; /* Darker blue color on hover */
+            transform: scale(1.1);
+        }
+
+        .notification {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(76, 175, 80, 0.8); /* Background with blur effect */
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 999; /* Ensure notification is on top */
+            backdrop-filter: blur(5px); /* Blur effect */
+        }
+
+        .check-icon {
+            width: 40px;
+            height: 40px;
+            background: url('https://cdn-icons-png.freepik.com/512/5610/5610944.png') no-repeat center center;
+            background-size: cover;
+            margin: 0 auto 10px; /* Center the icon */
+        }
+
+        .animated-text {
+            position: absolute;
+            bottom: 10px;
+            font-size: 1.2em;
+            color: white;
+            opacity: 0;
+            animation: jumpAnimation 1s infinite;
+        }
+
+        @keyframes jumpAnimation {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40%, 60% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .arrow-indicator {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: #ffcc00;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            transform: rotate(45deg);
+            display: none;
+        }
+
+        .show-arrow .arrow-indicator {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Supra Bootstrapper</h1>
+    <a href="https://cdn.discordapp.com/attachments/1199408845513039992/1201602008638038067/SupraV3_5.exe?ex=65ca6a13&is=65b7f513&hm=122d66c0cf6131dad8e2d23716257a437b48f25c80bd6554d471b12b4890a1ba&" class="button-link">
+        <button onclick="showNotification()">Launch</button>
+    </a>
+    <div class="animated-text">Crash Fixed</div>
+    <div class="cursor-trail"></div> <!-- Cursor trail element -->
+    <div class="arrow-indicator"></div> <!-- Arrow indicator element -->
+
+    <div id="notification" class="notification">
+        <div class="check-icon"></div>
+        Open file in Downloads! SupraMethod
+    </div>
+
+    <script>
+        function showNotification() {
+            var notification = document.getElementById("notification");
+            notification.style.display = "block";
+
+            // Show the arrow indicator
+            var arrowIndicator = document.querySelector(".arrow-indicator");
+            arrowIndicator.classList.add("show-arrow");
+
+            // Hide the notification after 2 seconds (adjust as needed)
+            setTimeout(function() {
+                notification.style.display = "none";
+                // Hide the arrow indicator
+                arrowIndicator.classList.remove("show-arrow");
+            }, 2000);
+        }
+
+        document.addEventListener("mousemove", function(e) {
+            // Update the position of the cursor trail
+            var cursorTrail = document.querySelector(".cursor-trail");
+            cursorTrail.style.left = e.pageX + "px";
+            cursorTrail.style.top = e.pageY + "px";
+
+            // Show the cursor trail with a fade-in effect
+            cursorTrail.style.opacity = "0.8";
+            setTimeout(function() {
+                cursorTrail.style.opacity = "0";
+            }, 500);
+        });
+    </script>
+</body>
+</html>
